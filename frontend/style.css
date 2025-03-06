@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+h1 {
+    color: #333;
+}
+
+.flashcard {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 10px;
+    width: 300px;
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.flashcard:hover {
+    background-color: #f9f9f9;
+}
+
+.flashcard p {
+    margin-top: 10px;
+    color: #666;
+}
+
+.link {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.link:hover {
+    color: darkblue;
+}

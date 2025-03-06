@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>FlashStudy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>FlashStudy</h1>
+    <div>
+        <h3>Upload a File</h3>
+        <input type="file" id="fileInput" accept=".pdf,.docx,.jpg,.png">
+        <button onclick="uploadFile()">Upload</button>
+    </div>
+    <div>
+        <h3>Enter Text</h3>
+        <textarea id="textInput" rows="10" cols="50" placeholder="Paste your text here..."></textarea>
+        <button onclick="processText()">Submit Text</button>
+    </div>
+    <div id="flashcard-container"></div>
+    <script src="script.js"></script>
+</body>
+
+</html>
