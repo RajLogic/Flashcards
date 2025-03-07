@@ -4,4 +4,6 @@ pytesseract
 PyPDF2
 python-docx
 pillow
-wikipedia-api
+scikit-learn
+numpy
+pandas

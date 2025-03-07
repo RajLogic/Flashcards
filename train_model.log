@@ -1,0 +1,57 @@
+2025-03-07 21:31:41,525 - INFO - Loaded 5 records from C:\Users\Rajvansh\Desktop\Projects\Flashcards\ml\training_data.csv
+2025-03-07 21:31:41,527 - INFO - TF-IDF vectorization completed
+2025-03-07 21:31:41,528 - INFO - Data split: 4 training samples, 1 test samples
+2025-03-07 21:31:41,529 - INFO - Model training completed
+2025-03-07 21:31:41,530 - INFO - Test set accuracy: 0.0000
+2025-03-07 21:31:41,536 - INFO - Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.00      0.00      0.00       0.0
+           1       0.00      0.00      0.00       1.0
+
+    accuracy                           0.00       1.0
+   macro avg       0.00      0.00      0.00       1.0
+weighted avg       0.00      0.00      0.00       1.0
+
+2025-03-07 21:31:41,539 - ERROR - Error during model training: n_splits=5 cannot be greater than the number of members in each class.
+2025-03-07 21:31:41,539 - ERROR - Training process failed: n_splits=5 cannot be greater than the number of members in each class.
+2025-03-07 21:33:49,843 - INFO - Loaded 15 records from C:\Users\Rajvansh\Desktop\Projects\Flashcards\ml\training_data.csv
+2025-03-07 21:33:49,849 - INFO - TF-IDF vectorization completed
+2025-03-07 21:33:49,852 - INFO - Data split: 13 training samples, 2 test samples
+2025-03-07 21:33:49,858 - INFO - Model training completed
+2025-03-07 21:33:49,859 - INFO - Test set accuracy: 0.0000
+2025-03-07 21:33:49,864 - INFO - Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.00      0.00      0.00       0.0
+           1       0.00      0.00      0.00       2.0
+
+    accuracy                           0.00       2.0
+   macro avg       0.00      0.00      0.00       2.0
+weighted avg       0.00      0.00      0.00       2.0
+
+2025-03-07 21:33:49,865 - INFO - Using 5 folds for cross-validation (min class size: 7)
+2025-03-07 21:33:49,876 - INFO - Cross-validation scores: [0.66666667 1.         0.66666667 0.33333333 0.33333333]
+2025-03-07 21:33:49,876 - INFO - Mean CV score: 0.6000 (+/- 0.4989)
+2025-03-07 21:33:49,879 - INFO - Model saved to C:\Users\Rajvansh\Desktop\Projects\Flashcards\ml\ml_model.joblib
+2025-03-07 21:33:49,880 - INFO - Vectorizer saved to C:\Users\Rajvansh\Desktop\Projects\Flashcards\ml\tfidf_vectorizer.joblib
+2025-03-07 21:55:20,276 - INFO - Loaded 15 records from C:\Users\Rajvansh\Desktop\Projects\Flashcards\ml\training_data.csv
+2025-03-07 21:55:20,278 - INFO - TF-IDF vectorization completed
+2025-03-07 21:55:20,278 - INFO - Data split: 13 training samples, 2 test samples
+2025-03-07 21:55:20,280 - INFO - Model training completed
+2025-03-07 21:55:20,281 - INFO - Test set accuracy: 0.0000
+2025-03-07 21:55:20,284 - INFO - Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.00      0.00      0.00       0.0
+           1       0.00      0.00      0.00       2.0
+
+    accuracy                           0.00       2.0
+   macro avg       0.00      0.00      0.00       2.0
+weighted avg       0.00      0.00      0.00       2.0
+
+2025-03-07 21:55:20,284 - INFO - Using 5 folds for cross-validation (min class size: 7)
+2025-03-07 21:55:20,294 - INFO - Cross-validation scores: [0.66666667 1.         0.66666667 0.33333333 0.33333333]
+2025-03-07 21:55:20,294 - INFO - Mean CV score: 0.6000 (+/- 0.4989)
+2025-03-07 21:55:20,296 - INFO - Model saved to C:\Users\Rajvansh\Desktop\Projects\Flashcards\ml\ml_model.joblib
+2025-03-07 21:55:20,296 - INFO - Vectorizer saved to C:\Users\Rajvansh\Desktop\Projects\Flashcards\ml\tfidf_vectorizer.joblib

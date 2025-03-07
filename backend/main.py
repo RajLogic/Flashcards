@@ -1,53 +1,71 @@
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI, UploadFile, File, Request
 from fastapi.middleware.cors import CORSMiddleware
-from .parsing import process_document
+from fastapi.responses import JSONResponse
+from typing import List
+from .models import Flashcard, TextInput
 from .flashcards import generate_flashcards
-from .database import save_flashcards, get_flashcards, init_db
+from .database import init_db, save_flashcards, get_flashcards
+from .parsing import parse_pdf, parse_docx, parse_image
 import logging
+import json
 
-# Logging is already configured in parsing.py, so no need to repeat
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler("../flashstudy.log"),
+        logging.StreamHandler()
+    ]
+)
 
 app = FastAPI()
+
+# Enable CORS to allow frontend communication
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:8001", "http://127.0.0.1:8001"],
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["Content-Type", "Accept"],
+)
 
 @app.on_event("startup")
 async def startup_event():
     logging.info("Application starting up")
     init_db()
-    logging.info("Database initialized")
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-@app.post("/upload/")
+@app.post("/upload/", response_model=List[Flashcard])
 async def upload_file(file: UploadFile = File(...)):
     logging.info(f"Received upload request for file: {file.filename}")
-    content = await process_document(file)
-    logging.debug(f"Processed content: {content[:200]}...")
+    if file.filename.endswith(".pdf"):
+        content = parse_pdf(file.file)
+    elif file.filename.endswith(".docx"):
+        content = parse_docx(file.file)
+    elif file.filename.endswith((".jpg", ".png")):
+        content = parse_image(file.file)
+    else:
+        content = await file.read()
+        content = content.decode("utf-8")
+    
+    logging.debug(f"Processed content: {content[:500]}...")
     flashcards = generate_flashcards(content)
-    logging.info(f"Generated {len(flashcards)} flashcards")
     save_flashcards(flashcards)
-    logging.info("Flashcards saved to database")
-    return {"flashcards": flashcards}
+    logging.info(f"Returning {len(flashcards)} flashcards: {json.dumps([flashcard.dict() for flashcard in flashcards], ensure_ascii=False)[:500]}...")
+    return JSONResponse(content=[flashcard.dict() for flashcard in flashcards])
 
-@app.post("/text/")
-async def process_text(request: dict):  # Accept JSON body
-    logging.info("Received text input request")
-    text = request.get("text", "").strip()
-    if not text:
-        logging.warning("Empty or invalid text input")
-        return {"flashcards": []}
-    logging.debug(f"Processing text input: {text[:200]}...")
-    flashcards = generate_flashcards(text)
-    logging.info(f"Generated {len(flashcards)} flashcards from text")
+@app.post("/text/", response_model=List[Flashcard])
+async def process_text(request: Request, input: TextInput):
+    logging.info(f"Received text input request with method: {request.method}")
+    logging.debug(f"Processing text input: {input.text[:500]}...")
+    flashcards = generate_flashcards(input.text)
     save_flashcards(flashcards)
-    logging.info("Flashcards saved to database")
-    return {"flashcards": flashcards}
+    logging.info(f"Returning {len(flashcards)} flashcards: {json.dumps([flashcard.dict() for flashcard in flashcards], ensure_ascii=False)[:500]}...")
+    return JSONResponse(content=[flashcard.dict() for flashcard in flashcards])
 
-@app.get("/flashcards/")
-async def list_flashcards():
-    logging.info("Fetching all flashcards")
-    return get_flashcards()
+@app.get("/flashcards/", response_model=List[Flashcard])
+async def fetch_flashcards():
+    logging.info("Received request to fetch flashcards")
+    flashcards = get_flashcards()
+    logging.info(f"Returning {len(flashcards)} flashcards from database")
+    return JSONResponse(content=[flashcard.dict() for flashcard in flashcards])

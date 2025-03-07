@@ -1,18 +1,39 @@
 async function uploadFile() {
+    console.log("Uploading file...");
     const fileInput = document.getElementById("fileInput");
     const file = fileInput.files[0];
+    if (!file) {
+        alert("Please select a file to upload!");
+        return;
+    }
+
     const formData = new FormData();
     formData.append("file", file);
 
-    const response = await fetch("http://localhost:8000/upload/", {
-        method: "POST",
-        body: formData,
-    });
-    const data = await response.json();
-    displayFlashcards(data.flashcards);
+    try {
+        const response = await fetch("http://localhost:8000/upload/", {
+            method: "POST",
+            body: formData,
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log("Received data from /upload/:", data);
+        if (!data.flashcards || !Array.isArray(data.flashcards)) {
+            console.error("Invalid response format, expected an object with a flashcards array:", data);
+            alert("Invalid response from server. Check console for details.");
+            return;
+        }
+        displayFlashcards(data.flashcards);
+    } catch (error) {
+        console.error("Error uploading file:", error);
+        alert("Failed to upload file: " + error.message);
+    }
 }
 
 async function processText() {
+    console.log("Processing text...");
     const textInput = document.getElementById("textInput");
     const text = textInput.value.trim();
 
@@ -21,49 +42,86 @@ async function processText() {
         return;
     }
 
-    const response = await fetch("http://localhost:8000/text/", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",  // Set JSON content type
-        },
-        body: JSON.stringify({ text: text }),  // Send JSON body
-    });
-    const data = await response.json();
-    displayFlashcards(data.flashcards);
+    console.log("Submitting text:", text.substring(0, 50) + "...");
+    try {
+        const response = await fetch("http://localhost:8000/text/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ text: text }),
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log("Received raw data from /text/:", data);
+        if (!data.flashcards || !Array.isArray(data.flashcards)) {
+            console.error("Invalid response format, expected an object with a flashcards array:", data);
+            alert("Invalid response from server. Check console for details.");
+            return;
+        }
+        displayFlashcards(data.flashcards);
+    } catch (error) {
+        console.error("Error processing text:", error);
+        alert("Failed to process text: " + error.message);
+    }
 }
 
 function displayFlashcards(flashcards) {
+    console.log("Attempting to display flashcards:", flashcards);
     const container = document.getElementById("flashcard-container");
-    container.innerHTML = "";
-    const cardMap = {}; // Map front text to div for linking
+    if (!container) {
+        console.error("Flashcard container not found in DOM! Check if 'flashcard-container' div exists in index.html.");
+        alert("Error: Flashcard container not found in DOM.");
+        return;
+    }
 
-    flashcards.forEach(card => {
+    // Clear previous flashcards
+    container.innerHTML = "";
+    console.log("Cleared previous content in flashcard-container");
+
+    if (!Array.isArray(flashcards)) {
+        console.error("Invalid flashcards format, expected an array:", flashcards);
+        container.innerHTML = "<p>Error: Invalid flashcards format. Check console for details.</p>";
+        return;
+    }
+
+    if (flashcards.length === 0) {
+        container.innerHTML = "<p>No flashcards generated. Try different text or check the backend logs.</p>";
+        console.warn("No flashcards to display");
+        return;
+    }
+
+    console.log(`Rendering ${flashcards.length} flashcards`);
+    flashcards.forEach((card, index) => {
+        console.log(`Processing flashcard ${index + 1}:`, card);
+        // Validate card structure
+        if (!card.front || !card.back || !card.category) {
+            console.warn(`Skipping invalid flashcard at index ${index}:`, card);
+            return;
+        }
+
         const div = document.createElement("div");
         div.className = "flashcard";
         div.innerHTML = `
             <strong>Question: ${card.front}</strong>
             <p style="display:none;">Answer: ${card.back}</p>
             <small>Category: ${card.category}</small>
-            ${card.links.length > 0 ? `<div>Related: ${card.links.map(link => `<span class="link" data-link="${link}">${link}</span>`).join(", ")}</div>` : ""}
         `;
         div.onclick = () => {
             const p = div.querySelector("p");
             p.style.display = p.style.display === "none" ? "block" : "none";
         };
-        cardMap[card.front] = div; // Store for linking
         container.appendChild(div);
+        console.log(`Appended flashcard ${index + 1} to container`);
     });
 
-    // Add click event for links
-    document.querySelectorAll(".link").forEach(link => {
-        link.onclick = (e) => {
-            e.stopPropagation(); // Prevent flashcard toggle
-            const targetFront = link.getAttribute("data-link");
-            const targetDiv = cardMap[targetFront];
-            if (targetDiv) {
-                targetDiv.scrollIntoView({ behavior: "smooth" });
-                targetDiv.querySelector("p").style.display = "block"; // Show answer
-            }
-        };
-    });
+    // Verify DOM update
+    const renderedCards = container.querySelectorAll(".flashcard");
+    console.log(`Total flashcards rendered in DOM: ${renderedCards.length}`);
+    if (renderedCards.length === 0) {
+        console.error("No flashcards were rendered. Check card data and DOM structure.");
+        container.innerHTML = "<p>Error: No flashcards rendered. Check console for details.</p>";
+    }
 }

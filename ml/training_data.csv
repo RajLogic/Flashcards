@@ -1,0 +1,115 @@
+text,is_important
+"Symbolic Reasoning represents data as symbols, and manipulates these symbols according to mathematical and logical rules to arrive at new knowledge.",1
+"Expert systems emulate the decision-making skills of human experts.",1
+"There are many kinds of AI, some are described briefly below:",0
+"Machine Learning is the ability to automatically learn and improve from experience.",1
+"For example, a computer is fed two statements: ' Man is mortal' and 'Aristotle is a man'.",0
+"Neural networks are inspired by the human brain's structure.",1
+"This is a random sentence with no specific meaning.",0
+"Deep Learning uses multiple layers to process data.",1
+"The weather today is sunny and warm.",0
+"Artificial Intelligence is transforming industries worldwide.",1
+"Please ignore this line as it contains no key information.",0
+"Natural Language Processing enables machines to understand text.",1
+"I had coffee this morning.",0
+"Reinforcement Learning involves learning through rewards.",1
+"The meeting is scheduled for tomorrow.",0
+"Supervised learning relies on labeled data for training.",1  
+"Unsupervised learning finds patterns in data without labels.",1  
+"AI can understand human emotions perfectly.",0  
+"Generative Adversarial Networks (GANs) generate realistic images.",1  
+"Machine learning models always provide 100% accuracy.",0  
+"Computer vision enables machines to interpret visual data.",1  
+"Support Vector Machines are used for classification tasks.",1  
+"AI can predict the future with complete certainty.",0  
+"Transfer learning allows pre-trained models to be fine-tuned.",1  
+"Artificial intelligence is a single algorithm.",0  
+"Self-driving cars use AI for navigation.",1  
+"Quantum computing is the same as classical computing.",0  
+"Clustering algorithms group similar data points.",1  
+"AI can make mistakes like humans.",1  
+"Every AI system requires large amounts of labeled data.",0  
+"Neural networks adjust weights through backpropagation.",1  
+"Bias in AI can lead to unfair outcomes.",1  
+"AI has consciousness and self-awareness.",0  
+"Data preprocessing is important for training ML models.",1  
+"AI models do not require any training data.",0  
+"Explainability in AI helps users understand model decisions.",1  
+"AI and automation always lead to job losses.",0  
+"Sentiment analysis detects emotions in text.",1  
+"Data privacy is a concern in AI applications.",1  
+"Rule-based AI systems rely on predefined logic.",1  
+"AI can function without any form of data.",0  
+"Machine learning improves with more high-quality data.",1  
+"AI models never exhibit bias.",0  
+"Recurrent Neural Networks process sequential data.",1  
+"AI-generated content is always accurate.",0  
+"Ensemble learning combines multiple models for better accuracy.",1  
+"Decision trees can be used for both classification and regression.",1  
+"AI can always explain how it reached a decision.",0  
+"Overfitting occurs when a model performs well on training data but poorly on new data.",1  
+"Feature engineering improves machine learning models.",1  
+"AI systems never fail or produce errors.",0  
+"Supervised learning does not require labeled data.",0  
+"AI applications include healthcare, finance, and entertainment.",1  
+"AI is capable of independent thought like a human.",0  
+"Data augmentation helps improve model generalization.",1  
+"Optimization algorithms adjust model parameters during training.",1  
+"AI chatbots can perfectly mimic human conversations at all times.",0  
+"Ethical AI considers fairness, accountability, and transparency.",1  
+"AI systems can generate art and music.",1  
+"All deep learning models are explainable.",0  
+"Neural networks consist of layers of interconnected nodes.",1  
+"Artificial intelligence can completely replace human creativity.",0  
+"Speech recognition allows machines to understand spoken language.",1  
+"Data bias can lead to inaccurate AI predictions.",1  
+"Reinforcement learning is used in game-playing AI.",1  
+"Every AI model must use deep learning.",0  
+"AI can adapt to new situations without retraining.",0  
+"Graph neural networks work with structured data like social networks.",1  
+"AI-generated text can sometimes contain misinformation.",1  
+"AI can fully replicate human intelligence.",0  
+"Federated learning allows AI models to be trained without sharing raw data.",1  
+"Overfitting makes a model too specialized to training data.",1  
+"Neural networks always require labeled data.",0  
+"AI can be used for fraud detection in banking.",1  
+"AI models never require updates after deployment.",0  
+"Bias in training data affects AI predictions.",1  
+"Computational linguistics is a field related to AI.",1  
+"Reinforcement learning agents improve by trial and error.",1  
+"AI can make completely unbiased decisions.",0  
+"AI-powered recommendation systems personalize user experiences.",1  
+"AI can diagnose medical conditions from X-rays.",1  
+"Supervised learning always requires millions of data points.",0  
+"Big data helps improve machine learning models.",1  
+"AI-powered chatbots enhance customer support.",1  
+"An AI system trained on biased data will always be fair.",0  
+"Data scientists use AI for predictive modeling.",1  
+"Image recognition is a key application of AI.",1  
+"Feature selection improves model efficiency.",1  
+"AI is capable of ethical decision-making without human intervention.",0  
+"AI models benefit from diverse and representative data.",1  
+"Unsupervised learning requires labeled data.",0  
+"AI-generated music is indistinguishable from human compositions.",0  
+"Natural Language Processing powers voice assistants.",1  
+"AI models trained on diverse data generalize better.",1  
+"AI can provide medical diagnoses without any human input.",0  
+"Data cleaning improves the accuracy of machine learning models.",1  
+"AI-generated deepfakes can be misleading.",1  
+"Every AI model uses neural networks.",0  
+"Anomaly detection identifies unusual patterns in data.",1  
+"Deep learning models always outperform traditional algorithms.",0  
+"AI models should be evaluated for fairness and bias.",1  
+"AI can understand all languages equally well.",0  
+"Explainable AI helps build user trust.",1  
+"AI can detect fake news with 100% accuracy.",0  
+"Data labeling is crucial for training supervised models.",1  
+"AI-driven automation can improve efficiency.",1  
+"AI cannot be used for cybersecurity applications.",0  
+"AI can analyze large amounts of text quickly.",1  
+"Training AI models requires computing power and data.",1  
+"Every AI system must be based on machine learning.",0  
+"Self-supervised learning reduces reliance on labeled data.",1  
+"AI-generated summaries help in document analysis.",1  
+"General AI, which mimics human intelligence, does not yet exist.",1  
+"AI can never surpass human intelligence.",0  
