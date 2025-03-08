@@ -1,5 +1,4 @@
 async function uploadFile() {
-    console.log("Uploading file...");
     const fileInput = document.getElementById("fileInput");
     const file = fileInput.files[0];
     if (!file) {
@@ -20,12 +19,7 @@ async function uploadFile() {
         }
         const data = await response.json();
         console.log("Received data from /upload/:", data);
-        if (!data.flashcards || !Array.isArray(data.flashcards)) {
-            console.error("Invalid response format, expected an object with a flashcards array:", data);
-            alert("Invalid response from server. Check console for details.");
-            return;
-        }
-        displayFlashcards(data.flashcards);
+        displayFlashcards(data);
     } catch (error) {
         console.error("Error uploading file:", error);
         alert("Failed to upload file: " + error.message);
@@ -33,7 +27,6 @@ async function uploadFile() {
 }
 
 async function processText() {
-    console.log("Processing text...");
     const textInput = document.getElementById("textInput");
     const text = textInput.value.trim();
 
@@ -56,12 +49,13 @@ async function processText() {
         }
         const data = await response.json();
         console.log("Received raw data from /text/:", data);
-        if (!data.flashcards || !Array.isArray(data.flashcards)) {
-            console.error("Invalid response format, expected an object with a flashcards array:", data);
+        if (!Array.isArray(data)) {
+            console.error("Invalid response format, expected an array:", data);
             alert("Invalid response from server. Check console for details.");
             return;
         }
-        displayFlashcards(data.flashcards);
+        console.log("Processed data for display:", data);
+        displayFlashcards(data);
     } catch (error) {
         console.error("Error processing text:", error);
         alert("Failed to process text: " + error.message);
@@ -81,13 +75,7 @@ function displayFlashcards(flashcards) {
     container.innerHTML = "";
     console.log("Cleared previous content in flashcard-container");
 
-    if (!Array.isArray(flashcards)) {
-        console.error("Invalid flashcards format, expected an array:", flashcards);
-        container.innerHTML = "<p>Error: Invalid flashcards format. Check console for details.</p>";
-        return;
-    }
-
-    if (flashcards.length === 0) {
+    if (!flashcards || flashcards.length === 0) {
         container.innerHTML = "<p>No flashcards generated. Try different text or check the backend logs.</p>";
         console.warn("No flashcards to display");
         return;

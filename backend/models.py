@@ -5,6 +5,8 @@ class Flashcard(BaseModel):
     front: str
     back: str
     category: str
+    
+
 
     class Config:
         json_schema_extra = {  # Changed from schema_extra to json_schema_extra
